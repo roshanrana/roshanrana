@@ -20,7 +20,7 @@ These projects are intentionally FinTech-leaning and enterprise-delivery shaped:
 
 - They start from operational problems a financial institution would recognize: market research, reconciliation, file-arrival control, regulatory intelligence, and controlled AI infrastructure.
 - They keep AI bounded by workflow, evidence, costs, and human or audit review.
-- They include local demos and deterministic test paths so an interviewer can clone and verify the work quickly.
+- They include local demos and deterministic test paths so an technical reviewer can clone and verify the work quickly.
 - They expose integration surfaces: MCP tools/resources, CLIs, APIs, event contracts, Docker profiles, audit exports, and runbooks.
 - They document tradeoffs clearly, including what has been validated and what still requires hardware or live provider credentials.
 
