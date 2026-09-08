@@ -6,7 +6,7 @@ This is where I build in public. Every project here starts from an operational p
 
 ## Projects
 
-Six systems. Each has an `OVERVIEW.md` (what it is and why) and a `SHOWCASE.md` (a guided tour of the features, with the commands to run) under `docs/`.
+Seven systems. Each has an `OVERVIEW.md` (what it is and why) and a `SHOWCASE.md` (a guided tour of the features, with the commands to run) under `docs/`.
 
 | | The problem | What it proves |
 |---|---|---|
@@ -16,6 +16,7 @@ Six systems. Each has an `OVERVIEW.md` (what it is and why) and a `SHOWCASE.md` 
 | **[LEDGERLENS](https://github.com/roshanrana/LedgerLens)** · Python, Go, SQLite, Kafka | Reconciliation teams want fewer manual breaks without false positives, and an LLM on every pair is neither affordable nor auditable. | Deterministic-first matching with LLM adjudication reserved for genuinely ambiguous pairs behind a cost-capped contract, persistent pair caching, human review, atomic runs with clean rollback, and a Go match-worker validated by replaying real Python-exported events. **6 of 6** golden checks, 75% straight-through, 12 of 12 emitted events schema-conformant; [measured results](https://github.com/roshanrana/LedgerLens#results). |
 | **[REGLENS](https://github.com/roshanrana/RegLens)** · Python, FastAPI, SQLite, Qdrant | Compliance teams need answers they can cite, and a RAG system that paraphrases a rule is worse than no system. | Hybrid retrieval with exact-citation routing, quote verification against retrieved evidence, abstention on weak evidence, hash-chained query audits with reviewer-ready exports, durable chat sessions, and adversarial prompt-injection evals, all runnable offline. 275 tests. Abstention **14.3%** with zero false abstentions, citation faithfulness **100%**; [measured results](https://github.com/roshanrana/RegLens#results). |
 | **[MARKETSAGE](https://github.com/roshanrana/MarketSage)** · Go, Python, TypeScript, MCP, DuckDB | An analyst workflow exists; LLM clients want to use it. | A Go MCP gateway exposing seven finance tools and a saved-run resource over a FastAPI analytics core, DuckDB audit persistence, a Next.js workbench, seeded/hybrid/live data modes, four MCP prompts, and dependency and vulnerability sweeps run before release. Evidence recall@5 **94.7%** on 150 FinanceBench queries with the ticker given, 44.0% without; brief claims grounded 12 / 12; 9 / 9 fault injections handled honestly; the offline sentiment fallback commits on only 8.1% of FiQA sentences and the card says so; [measured results](https://github.com/roshanrana/MarketSage#results). |
+| **[DRYDOCK](https://github.com/roshanrana/drydock)** · Python, LangGraph, MCP, SQLite, FastAPI | Client feeds are onboarded by hand: read the spec, write the pipeline, fix what breaks, sign off in chat. A model can write the pipeline; nothing it writes should reach a scheduler unjudged. | A bounded LangGraph loop that plans through MCP tools, generates a pipeline, an Airflow DAG and a field mapping, runs them in a three-layer sandbox against six deterministic checks, repairs on failure up to a fixed budget, escalates when the spec contradicts the sample, and stops at a real `interrupt()` before publishing; approval resumes the checkpoint from another process. An independent security review beat the first guard with live payloads before ship; the payloads are now tests. 505 tests. **6 of 6** scenarios as declared, **5 of 5** adversarial pipelines rejected, 4 of 4 heal scenarios repaired; [measured results](https://github.com/roshanrana/drydock#results). |
 
 ## Measured, not claimed
 
@@ -29,6 +30,7 @@ Every repository carries a results card in its README. Every number on it is wri
 | **[LEDGERLENS](https://github.com/roshanrana/LedgerLens#results)** | 6 of 6 golden checks on the sample replay; 75% matched straight through, 25% routed to review; 12 of 12 emitted events conform to the JSON Schema contracts. | `make golden` |
 | **[REGLENS](https://github.com/roshanrana/RegLens#results)** | Abstention 14.3% with zero false abstentions on 21 fixture queries; citation faithfulness 100%; recall@5 100% (n=18); reranker on versus off measured at every k. | `make eval` |
 | **[MARKETSAGE](https://github.com/roshanrana/MarketSage#results)** | Evidence recall@5 94.7% with the ticker given and 44.0% without, BM25 over 145 committed FinanceBench filing excerpts; brief claims grounded 12 / 12; 8 of 8 tool responses conform to the generated contract; 9 / 9 fault injections degrade honestly; the lexicon sentiment fallback commits on 8.1% of 234 FiQA sentences, so FinBERT is listed as pending rather than assumed. | `npm run eval` |
+| **[DRYDOCK](https://github.com/roshanrana/drydock#results)** | 6 of 6 corpus scenarios ended as their manifests declare (1 pass, 4 heal, 1 escalate); 4 of 4 heal scenarios repaired within three iterations; 5 of 5 hand-written adversarial pipelines rejected by the harness; 59 LangGraph checkpoints across six runs, every one replayable; 18 MCP tool calls recorded on the plans. Live-model rows pending until a recorded run exists. | `make bench` |
 
 ## How they are built
 
@@ -40,7 +42,7 @@ The same way every time, because the way is the point.
 
 **Deterministic by default, live by explicit act.** Every model, provider and external service sits behind an interface with a deterministic stand-in bound by default. Turning on the live path is a deliberate configuration change, never an accident of having a key in the environment.
 
-**Adversarial fixtures with names.** Late files, redeliveries, four price columns, a trailer that lies about its total, a broker killed mid-payday. Each maps to a test whose name says what broke.
+**Adversarial fixtures with names.** Late files, redeliveries, four price columns, a trailer that lies about its total, a broker killed mid-payday, a generated pipeline that hops from `os.path` to `os.system`. Each maps to a test whose name says what broke.
 
 **Honest about what is not measured.** Every ship report has a section for what was written but never run, and the numbers in a README trace to committed raw output or they are not in the README. In PROVENANCE that stopped being a convention and became a test: every published figure lives once in a JSON file, the charts are generated from it, and the build fails when a document drifts away from it or quotes a confounded number without saying so.
 
