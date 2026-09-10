@@ -46,6 +46,8 @@ The same way every time, because the way is the point.
 
 **Adversarial fixtures with names.** Late files, redeliveries, four price columns, a trailer that lies about its total, a broker killed mid-payday, a generated pipeline that hops from `os.path` to `os.system`. Each maps to a test whose name says what broke.
 
+**Built to be worked on by agents.** Every repository carries a code knowledge graph (graphify, tree-sitter, offline) with a committed `graphify-out/GRAPH_REPORT.md`, a `docs/graph/README.md` showing three real queries with their output, and an agent-facing skill, so an assistant opening the repo queries `graphify affected` and `graphify path` before it reads a file. Each project was also built under a gated lifecycle: frozen design documents, one task pack per change, a fresh-context verifier per task, and a hash-chained evidence ledger.
+
 **Honest about what is not measured.** Every ship report has a section for what was written but never run, and the numbers in a README trace to committed raw output or they are not in the README. In PROVENANCE that stopped being a convention and became a test: every published figure lives once in a JSON file, the charts are generated from it, and the build fails when a document drifts away from it or quotes a confounded number without saying so.
 
 ## Background
