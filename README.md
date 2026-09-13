@@ -38,6 +38,8 @@ Every repository carries a results card in its README. Every number on it is wri
 
 The same way every time, because the way is the point.
 
+**The lifecycle itself.** Everything below is one reusable method, `shipyard`: a nine-phase, nine-gate delivery lifecycle in which AI agents do the work and humans own the decisions — design frozen before code, one task pack per change carrying its risk class and token budget, four executor tiers routed by difficulty, fresh-context verification separate from implementation, a 23-control catalogue and a hash-chained evidence ledger an auditor can verify without trusting the agent. The full walkthrough, with diagrams, is the [Shipyard architecture deck (PDF)](docs/shipyard-how-i-build-enterprise-applications.pdf).
+
 **Design before code.** Requirements, a high-level design, a low-level design with frozen contracts, and a task-level execution plan, each approved before the next begins. In SHADOWBOOK no application code exists before the commit that approved the plan, and the git history shows it. Decisions are numbered and append-only, including the ones that were wrong.
 
 **One gate.** `make check` runs format, lint, strict types, and tests, offline, with no broker, no database, no network and no API key. CI runs the same command and adds nothing to it.
